@@ -297,15 +297,20 @@ export class AppComponent implements OnInit {
           const endDate = new Date(result.year + 10, result.month, result.day);
           
           let currentDate = new Date(startDate);
+          const originalDayOfWeek = currentDate.getDay(); // Store the original day of week
+          
           while (currentDate <= endDate) {
-            const dateKey = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-            this.workSchedule[dateKey] = {
-              isWorkDay: true,
-              isHoliday: false,
-              workHours: `${result.startTime} - ${result.endTime}`
-            };
+            // Only add if it's the same day of the week
+            if (currentDate.getDay() === originalDayOfWeek) {
+              const dateKey = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+              this.workSchedule[dateKey] = {
+                isWorkDay: true,
+                isHoliday: false,
+                workHours: `${result.startTime} - ${result.endTime}`
+              };
+            }
             
-            // Add 14 days (2 weeks) to the current date
+            // Add exactly 14 days to maintain the same day of the week
             currentDate = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000));
           }
         } else {

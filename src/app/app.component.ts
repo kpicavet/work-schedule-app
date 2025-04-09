@@ -155,7 +155,7 @@ interface HolidayHours {
 })
 export class AppComponent implements OnInit {
   title = 'work-schedule-app';
-  weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  weekDays = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
   currentDate = new Date();
   currentYear = this.currentDate.getFullYear();
   currentMonth = this.currentDate.getMonth();
@@ -184,20 +184,24 @@ export class AppComponent implements OnInit {
   }
 
   generateCalendar() {
-    const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-    const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
-    const startingDay = firstDay.getDay();
+    const year = this.currentDate.getFullYear();
+    const month = this.currentDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
     
-    this.daysInMonth = [];
-    
-    // Add empty cells for days before the first day of the month
-    for (let i = 0; i < startingDay; i++) {
-      this.daysInMonth.push(0);
+    // Get the day of the week (0-6) and adjust for Monday start (1-7)
+    let firstDayOfWeek = firstDay.getDay();
+    if (firstDayOfWeek === 0) { // If Sunday, make it 7
+      firstDayOfWeek = 7;
     }
+    firstDayOfWeek -= 1; // Adjust to 0-6 with Monday as 0
     
-    // Add days of the month
-    for (let i = 1; i <= lastDay.getDate(); i++) {
-      this.daysInMonth.push(i);
+    const daysInMonth = lastDay.getDate();
+    this.daysInMonth = Array(42).fill(0);
+    
+    // Fill the array with days of the month
+    for (let i = 0; i < daysInMonth; i++) {
+      this.daysInMonth[i + firstDayOfWeek] = i + 1;
     }
   }
 

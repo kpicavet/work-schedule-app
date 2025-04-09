@@ -1,0 +1,28 @@
+<div class="calendar-container">
+  <mat-card>
+    <div class="calendar-header">
+      <button mat-icon-button (click)="previousMonth()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <h2>{{ getMonthName() }} {{ currentYear }}</h2>
+      <button mat-icon-button (click)="nextMonth()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <div class="calendar-grid">
+      <!-- Week days header -->
+      <div class="week-day" *ngFor="let day of weekDays">
+        {{ day }}
+      </div>
+
+      <!-- Calendar days -->
+      <div class="calendar-day" 
+           *ngFor="let day of daysInMonth" 
+           [class.empty]="day === 0"
+           [class.today]="isToday(day)">
+        {{ day === 0 ? '' : day }}
+      </div>
+    </div>
+  </mat-card>
+</div>

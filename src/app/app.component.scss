@@ -1,0 +1,356 @@
+:host {
+  ::ng-deep {
+    .work-schedule-dialog {
+      .mat-mdc-dialog-container {
+        padding: 0;
+      }
+
+      .mat-mdc-dialog-surface {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.app-header {
+  background-color: #1976d2;
+  color: white;
+  padding: 1rem;
+  
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    &.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.app-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.app-footer {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  
+  p {
+    margin: 0;
+    color: #666;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-section {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  button {
+    background-color: transparent;
+    color: #1976d2;
+    
+    &:hover {
+      background-color: rgba(25, 118, 210, 0.1);
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.schedule-button-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.week-day {
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 1.1rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 8px;
+  position: relative;
+  font-size: 1.2rem;
+  min-height: 100px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &.empty {
+    background: transparent;
+    cursor: default;
+    border: none;
+  }
+
+  &.active {
+    border: 2px solid #1976d2;
+    background-color: #bdbdbd !important;
+    transform: scale(1.02);
+    z-index: 1;
+  }
+
+  &.today {
+    background: #e3f2fd;
+    font-weight: bold;
+
+    &.active {
+      background-color: #bdbdbd !important;
+    }
+  }
+
+  &.work-day {
+    background: #e8f5e9;
+
+    &.active {
+      background-color: #bdbdbd !important;
+    }
+  }
+
+  &.holiday {
+    background: #ffebee;
+
+    &.active {
+      background-color: #bdbdbd !important;
+    }
+  }
+}
+
+.day-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+
+  .holiday-text {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+
+  .work-hours {
+    color: #1976d2;
+  }
+}
+
+.holiday-icon {
+  color: #d32f2f;
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.legend-section {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  
+  h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.2rem;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    
+    .color-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      
+      &.today {
+        background: #e3f2fd;
+      }
+      
+      &.work-day {
+        background: #e8f5e9;
+      }
+      
+      &.holiday {
+        background: #ffebee;
+      }
+
+      &.active {
+        background-color: rgba(25, 118, 210, 0.1);
+        border: 2px solid #1976d2;
+      }
+    }
+    
+    span {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.save-button {
+  width: 100%;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+.two-week-schedule-button {
+  margin-top: 1rem;
+  width: 100%;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+.schedule-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.holiday-hours-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+
+  h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.2rem;
+  }
+
+  .holiday-hours-input {
+    margin-bottom: 1rem;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .holiday-hours-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .label {
+        color: #666;
+      }
+
+      .value {
+        font-weight: bold;
+        color: #1976d2;
+      }
+    }
+  }
+}
+
+.schedule-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .reset-button {
+    margin-left: auto;
+  }
+}

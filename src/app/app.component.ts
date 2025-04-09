@@ -292,25 +292,22 @@ export class AppComponent implements OnInit {
     }) => {
       if (result) {
         if (result.repeatEveryTwoWeeks) {
-          // Add schedule for the next 10 years, every 2 weeks
-          const startDate = new Date(result.year, result.month, result.day);
-          const endDate = new Date(result.year + 10, result.month, result.day);
+          // Create the initial date using the selected day
+          const selectedDay = this.selectedDay || this.currentDate.getDate();
+          const startDate = new Date(this.currentYear, this.currentMonth, selectedDay);
+          const endDate = new Date(this.currentYear + 10, this.currentMonth, selectedDay);
           
           let currentDate = new Date(startDate);
-          const originalDayOfWeek = currentDate.getDay(); // Store the original day of week
           
           while (currentDate <= endDate) {
-            // Only add if it's the same day of the week
-            if (currentDate.getDay() === originalDayOfWeek) {
-              const dateKey = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-              this.workSchedule[dateKey] = {
-                isWorkDay: true,
-                isHoliday: false,
-                workHours: `${result.startTime} - ${result.endTime}`
-              };
-            }
+            const dateKey = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+            this.workSchedule[dateKey] = {
+              isWorkDay: true,
+              isHoliday: false,
+              workHours: `${result.startTime} - ${result.endTime}`
+            };
             
-            // Add exactly 14 days to maintain the same day of the week
+            // Add exactly 14 days to the current date
             currentDate = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000));
           }
         } else {
